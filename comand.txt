@@ -1,0 +1,14 @@
+sar -n DEV 1 2
+查看网络流量：每一秒钟取1次值，取2次
+
+echo "coredump-%e-%p-%t-%s" > /proc/sys/kernel/core_pattern
+修core文件的输出路径
+
+netstat -an -tp | grep 11001 | grep ESTABLISHED | wc -l
+查看指定端口的连接数量
+
+perf record -e cpu-clock -g -p 9845 -F 99 -- sleep 300
+perf script -i perf.data &> perf.unfold
+/home/project/FlameGraph/stackcollapse-perf.pl perf.unfold &> perf.folded
+/home/project/FlameGraph/flamegraph.pl perf.folded > perf.svg
+生成火焰图
